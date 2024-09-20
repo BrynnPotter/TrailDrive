@@ -1,0 +1,18 @@
+import json
+
+# Load known devices
+try:
+    with open('devices.json', 'r') as file:
+        known_devices = json.load(file)
+except FileNotFoundError:
+    known_devices = []
+
+# Function to check new devices
+def is_new_device(bssid):
+    return bssid not in known_devices
+
+# Add new device
+def add_device(bssid):
+    known_devices.append(bssid)
+    with open('devices.json', 'w') as file:
+        json.dump(known_devices, file)
